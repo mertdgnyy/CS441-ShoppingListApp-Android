@@ -7,14 +7,18 @@
     tools:context=".MainActivity">
 
 
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight = "1">
-    </ListView>
+        android:layout_marginTop="52dp"
+        android:layout_weight="1">
+
+        </ListView>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -23,24 +27,23 @@
 
         <EditText
             android:id="@+id/edit_text"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:hint="Add items to the list"
-            android:visibility="visible"
-            tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/add_Button"
-            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
-
             android:layout_height="match_parent"
-            android:text="Add"
+            android:layout_weight="1"
+            android:hint="Press Return to add items into list"
             android:visibility="visible"
-            app:icon="@android:drawable/ic_input_add"
-            app:iconTint="#F3E6E6"
             tools:visibility="visible" />
+
+        <!--        <Button-->
+        <!--            android:id="@+id/add_Button"-->
+        <!--            style="@style/Widget.AppCompat.Button.Small"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:text="Add"-->
+        <!--            android:visibility="visible"-->
+        <!--            app:icon="@android:drawable/ic_input_add"-->
+        <!--            app:iconTint="#F3E6E6"-->
+        <!--            tools:visibility="visible" />-->
 
     </LinearLayout>
 
