@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> itemList;
     private ListView shopList;
     private EditText writeItem;
-//    private Button button;
     private ArrayAdapter<String> array;
 
     @Override
@@ -34,13 +34,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         shopList = (ListView) findViewById(R.id.list_view);
         writeItem = (EditText) findViewById(R.id.edit_text);
-//        button = (Button) findViewById(R.id.add_Button);
 
         itemList = new ArrayList<>();
 
-        array = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        //creating array with arrayadapter for our item list
+        array = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,itemList);
         shopList.setAdapter(array);
 
+
+
+        //It is the part that you add items with 'return' key
         writeItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -49,15 +52,39 @@ public class MainActivity extends AppCompatActivity {
                     array.add(item);
                     array.notifyDataSetChanged();
                     writeItem.setText("");
-
                 }
-
                 return false;
             }
         });
-//        protected void deleteItem(TextView view){
-//
-//        }
+
+
+        // It is the part that you delete items with clicking long
+        shopList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int i,long l) {
+
+                final int item = i;
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you want to delete this item?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i){
+                                itemList.remove(item);
+                                array.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No",null)
+                        .show();
+                return true;
+                // I added alertdialog so that it looks good
+
+            }
+        });
+
+
 
     }
 }
